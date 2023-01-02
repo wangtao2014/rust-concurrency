@@ -38,3 +38,15 @@
     - Rc<T> 单线程
     - Arc<T> 多线程 线程安全的方式改变引用计数的类型
 
+# send and sync
+- send trait
+    - Send 标记 trait 表明实现了 Send 的类型值的所有权可以在线程间传送
+    - 几乎所有的 Rust 类型都是 Send 的,Rc<T> 例外
+    - 因为如果克隆了 Rc<T> 的值并尝试将克隆的所有权转移到另一个线程，这两个线程都可能同时更新引用计数
+
+- Sync trait
+    - Sync 标记 trait 表明一个实现了 Sync 的类型可以安全的在多个线程中拥有其值的引用
+
+- 手动实现 Send 和 Sync 是不安全的
+
+-[无畏并发](https://github.com/endruz/kulolo/tree/main/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Rust/1-Rust%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%AD%E8%A8%80/16.%E6%97%A0%E7%95%8F%E5%B9%B6%E5%8F%91)
